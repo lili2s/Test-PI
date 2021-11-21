@@ -4,7 +4,7 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 def conectar():
-    return sqlite3.connect('emcomendas.db')
+    return sqlite3.connect('encomendas.db')
     
 def criaTabelas():
     conexao = conectar()
@@ -56,24 +56,20 @@ def limaparTabela():
     return
     
 def notificarMorador(emailMorador, destinatario):
-    usuarioGmail="";
-    senhaGmail=""
-    enderecoGmail=""
+    usuarioGmail="enviaemailpython2021@gmail.com"
+    senhaGmail="2021@Paython"
    
     try:
-        if usuarioGmail and senhaGmail and enderecoGmail:
-            corpoEmail = """\
-            From: %s
-            To: %s
-            Subject: Retirar Encomenda
-            
-            Sr(a) %s, favor retirar encomenda na portaria.
-            """ % (enderecoGmail, emailMorador, destinatario)
+        if usuarioGmail and senhaGmail:
+            corpoEmail = """\From: %s
+To: %s
+Subject: Retirar Encomenda\n
+Sr(a) %s, favor retirar encomenda na portaria""" % (usuarioGmail, emailMorador, destinatario)
 
             server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
             server.ehlo()
             server.login(usuarioGmail, senhaGmail)
-            server.sendmail(enderecoGmail, email, corpoEmail)
+            server.sendmail(usuarioGmail, emailMorador, corpoEmail)
             server.close()
     except:
         return
