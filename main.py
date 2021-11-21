@@ -10,7 +10,7 @@ def criaTabelas():
     conexao = conectar()
     sql = """CREATE TABLE IF NOT EXISTS ENCOMENDAS(
     id integer PRIMARY KEY,
-    description text
+    description text,
     destinatario text, 
     ramal integer, 
     email text,
